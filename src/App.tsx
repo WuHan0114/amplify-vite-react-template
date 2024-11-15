@@ -6,7 +6,7 @@ import { generateClient } from "aws-amplify/data";
 const client = generateClient<Schema>();
 
 function App() {
-  const { signOut } = useAuthenticator();
+  const { user, signOut } = useAuthenticator();
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
   useEffect(() => {
@@ -40,7 +40,8 @@ function App() {
           Review next step of this tutorial.
         </a>
           </div>
-     <button onClick={signOut}>Sign out</button>
+          <button onClick={signOut}>Sign out</button>
+          <h1>{user?.signInDetails?.loginId}'s todos</h1>
     </main>
   );
 }
