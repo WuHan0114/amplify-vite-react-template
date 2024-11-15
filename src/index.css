@@ -63,3 +63,25 @@ a {
   font-weight: 800;
   text-decoration: none;
 }
+
+.message-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.todo-content {
+    flex-grow: 1;
+}
+
+.separator {
+    color: #666;
+}
+
+.user-id-box {
+    background-color: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    color: #666;
+}

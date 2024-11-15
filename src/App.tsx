@@ -1,4 +1,3 @@
-// App.tsx
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { useAuthenticator } from '@aws-amplify/ui-react';
@@ -19,7 +18,7 @@ function App() {
   function createTodo() {
     client.models.Todo.create({ 
       content: window.prompt("Todo content"),
-      userId: user?.signInDetails?.loginId || 'anonymous'  // 添加用户ID
+      userId: user?.signInDetails?.loginId || 'anonymous'
     });
   }
     
@@ -38,8 +37,11 @@ function App() {
             key={todo.id}
             className="todo-item"
           >
-            <span className="todo-content">{todo.content}</span>
-            <span className="user-id">@{todo.userId || 'anonymous'}</span>
+            <div className="message-container">
+              <span className="todo-content">{todo.content}</span>
+              <span className="separator">—</span>
+              <span className="user-id-box">@{todo.userId || 'anonymous'}</span>
+            </div>
           </li>
         ))}
       </ul>
@@ -55,5 +57,4 @@ function App() {
     </main>
   );
 }
-
 export default App;
