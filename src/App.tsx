@@ -28,8 +28,8 @@ function App() {
 
   return (
     <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
+      <h1>My Chatroom</h1>
+      <button onClick={createTodo}>Send</button>
       <ul>
         {todos.map((todo) => (
           <li 
