@@ -1,3 +1,4 @@
+// App.tsx
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { useAuthenticator } from '@aws-amplify/ui-react';
@@ -16,12 +17,16 @@ function App() {
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+    client.models.Todo.create({ 
+      content: window.prompt("Todo content"),
+      userId: user?.signInDetails?.loginId || 'anonymous'  // 添加用户ID
+    });
   }
     
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id })
   }
+
   return (
     <main>
       <h1>My todos</h1>
@@ -29,8 +34,13 @@ function App() {
       <ul>
         {todos.map((todo) => (
           <li 
-          onClick={() => deleteTodo(todo.id)}
-          key={todo.id}>{todo.content}</li>
+            onClick={() => deleteTodo(todo.id)}
+            key={todo.id}
+            className="todo-item"
+          >
+            <span className="todo-content">{todo.content}</span>
+            <span className="user-id">@{todo.userId || 'anonymous'}</span>
+          </li>
         ))}
       </ul>
       <div>
@@ -39,9 +49,9 @@ function App() {
         <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
           Review next step of this tutorial.
         </a>
-          </div>
-          <button onClick={signOut}>Sign out</button>
-          <h1>{user?.signInDetails?.loginId}'s todos</h1>
+      </div>
+      <button onClick={signOut}>Sign out</button>
+      <h1>{user?.signInDetails?.loginId}'s todos</h1>
     </main>
   );
 }
